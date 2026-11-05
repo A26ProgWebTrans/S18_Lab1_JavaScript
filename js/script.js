@@ -14,12 +14,41 @@ function genererContenu() {
 
 	for (let i = 0; i < nbSection; i++) {
 		const	nodeTitre = document.createElement("h2"),
+			nodeAside = document.createElement("aside"),
 			nodePara = document.createElement("p");
 
 		nodeTitre.textContent = titre + " [" + i + "]";
 		nodePara.textContent = txt + " [" + i + "]";
+		nodeAside.textContent = "Plus de détails à propos de : " + i
+
+		nodeTitre.setAttribute("monId", "Id" + i);
+
+		nodeTitre.addEventListener("mousedown", function(event) {
+			console.log(event);
+
+			console.log(event.target);
+
+			console.log(event.target.getAttribute("monId"));
+
+			if (event.target.style.color == "gray") {
+				event.target.style.color = "white";
+			} else if (event.target.style.color == "white") {
+				event.target.style.color = "black";
+			} else {
+				event.target.style.color = "gray";
+			}
+		});
+
+		nodeTitre.addEventListener("mouseenter", function(event) {
+			nodeAside.classList.add("show");
+		});
+
+		nodeTitre.addEventListener("mouseleave", function(event) {
+			nodeAside.classList.remove("show");
+		});
 
 		blocStage.appendChild(nodeTitre);
+		blocStage.appendChild(nodeAside);
 		blocStage.appendChild(nodePara);
 	}
 
